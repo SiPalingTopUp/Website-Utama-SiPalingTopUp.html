@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiPalingTopUp | Top Up Game Termurah</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        :root {
+            --primary: #3b82f6;
+            --primary-light: #60a5fa;
+            --primary-dark: #2563eb;
+            --secondary: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text: #1e293b;
+            --text-light: #64748b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f5ff 0%, #e6f0ff 100%);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0) 70%);
+            z-index: -1;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0) 70%);
+            z-index: -1;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .card-header {
+            padding: 40px 30px 30px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            padding-bottom: 60px;
+        }
+        
+        .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            position: relative;
+            background-color: white;
+            padding: 5px;
+            transition: var(--transition);
+        }
+        
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            top: -9px;
+            left: -9px;
+            z-index: -1;
+        }
+        
+        .store-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .store-tagline {
+            font-size: 15px;
+            opacity: 0.9;
+            font-weight: 400;
+            max-width: 280px;
+            margin: 0 auto;
+        }
+        
+        .badge {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+            z-index: 3;
+            white-space: nowrap;
+        }
+        
+        .card-body {
+            padding: 40px 30px 30px;
+            margin-top: -20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .slogan {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-dark);
+            box-shadow: var(--shadow);
+            position: relative;
+            border: 1px solid rgba(59, 130, 246, 0.1);
+            line-height: 1.6;
+        }
+        
+        .slogan span {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text);
+            transition: var(--transition);
+            background: white;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+        
+        .link-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .link-item:hover::before {
+            width: 6px;
+            background: var(--secondary);
+        }
+        
+        .link-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 20px;
+            color: white;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        
+        .link-item:hover .link-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .whatsapp .link-icon {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+        }
+        
+        .instagram .link-icon {
+            background: linear-gradient(45deg, #405DE6, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+        
+        .website .link-icon {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .link-text {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .link-title {
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+        
+        .link-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .link-arrow {
+            color: var(--text-light);
+            margin-left: 10px;
+            transition: var(--transition);
+        }
+        
+        .link-item:hover .link-arrow {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--text-light);
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+        }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+            border-radius: 24px;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            opacity: 0.05;
+            color: var(--primary);
+            font-size: 24px;
+        }
+        
+        .floating-icon:nth-child(1) {
+            top: 20%;
+            left: 10%;
+        }
+        
+        .floating-icon:nth-child(2) {
+            bottom: 15%;
+            right: 10%;
+        }
+        
+        .floating-icon:nth-child(3) {
+            top: 40%;
+            right: 15%;
+        }
+        
+        @media (max-width: 480px) {
+            .card {
+                border-radius: 20px;
+            }
+            
+            .card-header {
+                padding: 30px 20px 50px;
+            }
+            
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .store-name {
+                font-size: 24px;
+            }
+            
+            .badge {
+                font-size: 13px;
+                padding: 6px 15px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="card">
+        <div class="floating-icons">
+            <i class="fas fa-gamepad floating-icon"></i>
+            <i class="fas fa-bolt floating-icon"></i>
+            <i class="fas fa-coins floating-icon"></i>
+        </div>
+        
+        <div class="card-header">
+            <div class="profile-container">
+                <img src="https://raw.githubusercontent.com/SiPalingTopUp/sipalingtopup-profile.jpg/refs/heads/main/sipalingtopup-profile.jpg" alt="SiPalingTopUp" class="profile-img">
+            </div>
+            <h1 class="store-name">SiPalingTopUp</h1>
+            <p class="store-tagline">Top Up Game & Voucher Termurah Se-Indonesia</p>
+            <div class="badge">TRUSTED SELLER ★★★★★</div>
+        </div>
+        
+        <div class="card-body">
+            <div class="slogan">
+                "Top Up <span>#1 Tercepat</span> dengan Harga <span>Paling Murah</span> di Indonesia!"
+            </div>
+            
+            <div class="links">
+                <a href="https://wa.me/62881026244417" class="link-item whatsapp" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">WhatsApp Customer Service</div>
+                        <div class="link-desc">Respon cepat 24 jam via WhatsApp</div>
+                    </div>
+                    <i class="fas fa-chevron-right link-arrow"></i>
+                </a>
+                
+                <a href="https://www.instagram.com/sipalingtopup_?igsh=cXpjZGI1aGZ5YTFo" class="link-item instagram" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">Instagram Official</div>
+                        <div class="link-desc">Promo & update terbaru</div>
+                    </div>
+                    <i class="fas fa-chevron-right link-arrow"></i>
+                </a>
+                
+                <a href="https://sipalintopup.com" class="link-item website" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-title">Website TopUp</div>
+                        <div class="link-desc">Murah Cepat Dan Aman</div>
+                    </div>
+                    <i class="fas fa-chevron-right link-arrow"></i>
+                </a>
+            </div>
+            
+            <div class="footer">
+                &copy; 2025 SiPalingTopUp. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
